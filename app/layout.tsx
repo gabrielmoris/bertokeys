@@ -13,7 +13,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className={lato.className}>
+      <body
+        className={`${lato.className} bg-gradient-to-b dark:from-black duration-500 dark:to-[#131633] dark:text-white from-white to-[rgb(204,208,245)]`}
+      >
         <Header />
         {children}
       </body>
