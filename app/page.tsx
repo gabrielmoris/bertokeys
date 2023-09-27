@@ -7,3 +7,5 @@ export default function Home() {
     </main>
   );
 }
+
+// https://developers.google.com/my-business/content/review-data?hl=es

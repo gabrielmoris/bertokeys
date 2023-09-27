@@ -11,6 +11,14 @@ export const Header = () => {
   const router = useRouter();
 
   useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     const rootElement = document.documentElement;
     if (isDarkMode) {
       rootElement.classList.add("dark");
@@ -24,9 +32,9 @@ export const Header = () => {
   };
 
   return (
-    <header className="overflow-x-hidden">
+    <header className="overflow-x-hidden overflow-y-hidden">
       <section className="dark:bg-gray-800 bg-[#ffffff] shadow md:shadow sm:flex sm:justify-between sm:px-4 sm:py-3 sm:items-center">
-        <div className="flex items-center justify-between px-4 py-3 sm:p-0">
+        <div className="flex h-18 items-center justify-between px-4 py-3 sm:p-0">
           <div>
             <Image
               src={isDarkMode ? "/logo-light.svg" : "/logo-dark.svg"}
@@ -61,13 +69,13 @@ export const Header = () => {
             Obtener Presupuesto
           </a>
           <a href="#" className="block px-2 py-1 font-semibold hover:text-[#00000070] dark:text-white dark:hover:text-[#ffffff90]">
-            Pedir cita
+            Novedades
           </a>
           <a href="#" className="block px-2 py-1 font-semibold hover:text-[#00000070] dark:text-white dark:hover:text-[#ffffff90]">
-            Quiénes Somos
+            Multimedia
           </a>
           <a href="#" className="block px-2 py-1 font-semibold hover:text-[#00000070] dark:text-white dark:hover:text-[#ffffff90]">
-            Testimonio
+            Testimonios
           </a>
           <a href="#" className="block px-2 py-1 font-semibold hover:text-[#00000070] dark:text-white dark:hover:text-[#ffffff90]">
             Galeria
@@ -82,11 +90,11 @@ export const Header = () => {
         </nav>
       </section>
       <nav
-        className={`w-screen p-5 overflow-hidden md:hidden duration-500 backdrop-filter backdrop-blur-lg ${
+        className={`w-screen p-5 fixed top-0 h-screen md:hidden duration-500 backdrop-filter backdrop-blur-lg ${
           isOpen ? "transform translate-x-0" : "transform translate-x-full"
         }`}
       >
-        <div className="w-full flex items-end justify-end">
+        <div className="w-full flex items-end justify-start mt-2 mb-10">
           <button
             type="button"
             onClick={handleDarkMode}
@@ -99,13 +107,13 @@ export const Header = () => {
           Obtener Presupuesto
         </a>
         <a href="#" className="block px-2 py-2 font-semibold  dark:text-white" onClick={() => setIsOpen(!isOpen)}>
-          Pedir cita
+          Novedades
         </a>
         <a href="#" className="block px-2 py-2 font-semibold  dark:text-white" onClick={() => setIsOpen(!isOpen)}>
-          Quiénes Somos
+          Multimedia
         </a>
         <a href="#" className="block px-2 py-2 font-semibold  dark:text-white" onClick={() => setIsOpen(!isOpen)}>
-          Testimonio
+          Testimonios
         </a>
         <a href="#" className="block px-2 py-2 font-semibold  dark:text-white" onClick={() => setIsOpen(!isOpen)}>
           Galeria
