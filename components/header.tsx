@@ -6,7 +6,10 @@ import { useRouter } from "next/navigation";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const localTheme = window.localStorage.getItem("darkMode");
+    return localTheme ? JSON.parse(localTheme) : false;
+  });
 
   const router = useRouter();
 
@@ -22,8 +25,10 @@ export const Header = () => {
     const rootElement = document.documentElement;
     if (isDarkMode) {
       rootElement.classList.add("dark");
+      window.localStorage.setItem("darkMode", "true");
     } else {
       rootElement.classList.remove("dark");
+      window.localStorage.setItem("darkMode", "false");
     }
   }, [isDarkMode]);
 
@@ -71,7 +76,7 @@ export const Header = () => {
           <a href="#" className="block px-2 py-1 font-semibold hover:text-[#00000070] dark:text-white dark:hover:text-[#ffffff90]">
             Novedades
           </a>
-          <a href="#" className="block px-2 py-1 font-semibold hover:text-[#00000070] dark:text-white dark:hover:text-[#ffffff90]">
+          <a href="#multimedia" className="block px-2 py-1 font-semibold hover:text-[#00000070] dark:text-white dark:hover:text-[#ffffff90]">
             Multimedia
           </a>
           <a href="#" className="block px-2 py-1 font-semibold hover:text-[#00000070] dark:text-white dark:hover:text-[#ffffff90]">
@@ -109,7 +114,7 @@ export const Header = () => {
         <a href="#" className="block px-2 py-2 font-semibold  dark:text-white" onClick={() => setIsOpen(!isOpen)}>
           Novedades
         </a>
-        <a href="#" className="block px-2 py-2 font-semibold  dark:text-white" onClick={() => setIsOpen(!isOpen)}>
+        <a href="#multimedia" className="block px-2 py-2 font-semibold  dark:text-white" onClick={() => setIsOpen(!isOpen)}>
           Multimedia
         </a>
         <a href="#" className="block px-2 py-2 font-semibold  dark:text-white" onClick={() => setIsOpen(!isOpen)}>
