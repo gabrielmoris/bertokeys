@@ -37,11 +37,12 @@ export const Header = () => {
   };
 
   return (
-    <header className="overflow-x-hidden overflow-y-hidden">
+    <header className="overflow-x-hidden overflow-y-hidden sticky top-0">
       <section className="dark:bg-gray-800 bg-[#ffffff] shadow md:shadow sm:flex sm:justify-between sm:px-4 sm:py-3 sm:items-center">
         <div className="flex h-18 items-center justify-between px-4 py-3 sm:p-0">
           <div>
             <Image
+              priority
               src={isDarkMode ? "/logo-light.svg" : "/logo-dark.svg"}
               width={80}
               height={80}
@@ -70,7 +71,7 @@ export const Header = () => {
           </div>
         </div>
         <nav className="hidden md:flex justify-center items-center">
-          <a href="#" className="block px-2 py-1 font-semibold hover:text-[#00000070] dark:text-white dark:hover:text-[#ffffff90]">
+          <a href="#presupuesto" className="block px-2 py-1 font-semibold hover:text-[#00000070] dark:text-white dark:hover:text-[#ffffff90]">
             Obtener Presupuesto
           </a>
           <a href="#" className="block px-2 py-1 font-semibold hover:text-[#00000070] dark:text-white dark:hover:text-[#ffffff90]">
@@ -108,7 +109,7 @@ export const Header = () => {
             {isDarkMode ? "☾" : "☀"}
           </button>
         </div>
-        <a href="#" className="block px-2 py-2 font-semibold  dark:text-white dark:hover:text-red" onClick={() => setIsOpen(!isOpen)}>
+        <a href="#presupuesto" className="block px-2 py-2 font-semibold  dark:text-white dark:hover:text-red" onClick={() => setIsOpen(!isOpen)}>
           Obtener Presupuesto
         </a>
         <a href="#" className="block px-2 py-2 font-semibold  dark:text-white" onClick={() => setIsOpen(!isOpen)}>

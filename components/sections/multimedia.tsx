@@ -9,18 +9,11 @@ const YOUTUBE_PLAYLIST_ITEMS_API = "https://www.googleapis.com/youtube/v3/playli
 const key = process.env.NEXT_PUBLIC_YOUTUBE_KEY;
 
 export const Multimedia = () => {
-  const [youtubeListConcert, setYoutubeListConcert] = useState([]);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
   const [youtubeListLatestVideos, setYoutubeListLatestVideos] = useState([]);
 
   useEffect(() => {
-    fetch(`${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&playlistId=PL_1PtPZ6qufyEK5c682JAbk8VAe8Cyz2P&maxResults=4&key=${key}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => setYoutubeListConcert(data.items))
-      .catch((e) => {
-        console.log("Error in youtube API", e);
-      });
+    setIsSmallScreen(window.innerWidth <= 768);
     fetch(`${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&playlistId=PL_1PtPZ6qufySoZIHCMxMDQDZ68ZAVvTU&maxResults=4&key=${key}`)
       .then((res) => {
         return res.json();
@@ -32,8 +25,8 @@ export const Multimedia = () => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold text-center m-10">Escucha mi trabajo</h1>
+    <div className="w-full flex flex-col items-center justify-center" id="multimedia">
+      <h1 className="w-full md:text-2xl font-bold text-center m-10">Escucha mi trabajo</h1>
       <div className="flex gap-5 flex-row flex-wrap justify-center items-center ">
         {youtubeListLatestVideos.map((video) => {
           const { id, snippet = {} }: any = video;
@@ -43,8 +36,8 @@ export const Multimedia = () => {
             <ReactPlayer
               className="rounded border-2 border-black dark:border-white"
               controls
-              width="450px"
-              height="300px"
+              width={!isSmallScreen ? "450px" : "300px"}
+              height={!isSmallScreen ? "300px" : "200px"}
               key={id}
               fallback={<Loading />}
               url={`https://www.youtube.com/watch?v=${resourceId.videoId}`}
