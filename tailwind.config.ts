@@ -12,6 +12,10 @@ const config: Config = {
       animation: {
         "spin-fast": "spin 0.5s linear infinite",
       },
+      fontFamily: {
+        zendots: ["Zen Dots"],
+        Wallpoet: ["Wallpoet"],
+      },
     },
   },
   plugins: [],

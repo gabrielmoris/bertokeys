@@ -34,6 +34,7 @@ export const Header = () => {
 
   const handleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -100,7 +101,7 @@ export const Header = () => {
           isOpen ? "transform translate-x-0" : "transform translate-x-full"
         }`}
       >
-        <div className="w-full flex items-end justify-start mt-2 mb-10">
+        <div className="w-full flex items-end justify-start mt-3 mb-10">
           <button
             type="button"
             onClick={handleDarkMode}

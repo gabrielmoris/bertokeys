@@ -26,7 +26,7 @@ export const Multimedia = () => {
 
   return (
     <div className="w-full flex flex-col items-center justify-center" id="multimedia">
-      <h1 className="w-full md:text-2xl font-bold text-center m-10">Escucha mi trabajo</h1>
+      <h1 className="font-zendots text-xl  md:text-2xl font-bold text-center m-10">Escucha mi trabajo</h1>
       <div className="flex gap-5 flex-row flex-wrap justify-center items-center ">
         {youtubeListLatestVideos.map((video) => {
           const { id, snippet = {} }: any = video;
