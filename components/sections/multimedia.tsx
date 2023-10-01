@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
+import { Loading } from "../uiComponents/loading";
 
 const YOUTUBE_PLAYLIST_ITEMS_API = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -28,12 +29,12 @@ export const Multimedia = () => {
       .catch((e) => {
         console.log("Error in youtube API", e);
       });
-  }, [key]);
+  }, []);
 
   return (
-    <div className="classes-list">
-      <h1 className="text-2xl font-bold text-center m-10">Multimedia</h1>
-      <div className="w-full grid grid-flow-row grid-cols-2 gap-5">
+    <div className="w-full flex flex-col items-center justify-center">
+      <h1 className="text-2xl font-bold text-center m-10">Escucha mi trabajo</h1>
+      <div className="flex gap-5 flex-row flex-wrap justify-center items-center ">
         {youtubeListLatestVideos.map((video) => {
           const { id, snippet = {} }: any = video;
           const { resourceId }: any = snippet;
@@ -41,7 +42,11 @@ export const Multimedia = () => {
           return (
             <ReactPlayer
               className="rounded border-2 border-black dark:border-white"
+              controls
+              width="450px"
+              height="300px"
               key={id}
+              fallback={<Loading />}
               url={`https://www.youtube.com/watch?v=${resourceId.videoId}`}
             />
           );
