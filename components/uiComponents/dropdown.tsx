@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-export const Dropdown = ({ options, onChange }) => {
+export const Dropdown = ({ options, onChange, title = "title" }: any) => {
   const [selectedOption, setSelectedOption] = useState(options[0].valueOfOption);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,7 +18,8 @@ export const Dropdown = ({ options, onChange }) => {
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-left w-full">
+      <p className="text-2xl pb-10">{title}</p>
       <div>
         <button
           type="button"

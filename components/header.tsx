@@ -6,12 +6,16 @@ import { useRouter } from "next/navigation";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const localTheme = window.localStorage.getItem("darkMode");
-    return localTheme ? JSON.parse(localTheme) : false;
-  });
+  const [isDarkMode, setIsDarkMode] = useState(null);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (isDarkMode === null && typeof window !== "undefined") {
+      const localTheme = window.localStorage.getItem("darkMode");
+      setIsDarkMode(localTheme ? JSON.parse(localTheme) : false);
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     if (isOpen) {
@@ -22,18 +26,20 @@ export const Header = () => {
   }, [isOpen]);
 
   useEffect(() => {
-    const rootElement = document.documentElement;
-    if (isDarkMode) {
-      rootElement.classList.add("dark");
-      window.localStorage.setItem("darkMode", "true");
-    } else {
-      rootElement.classList.remove("dark");
-      window.localStorage.setItem("darkMode", "false");
+    if (isDarkMode !== null) {
+      const rootElement = document.documentElement;
+      if (isDarkMode) {
+        rootElement.classList.add("dark");
+        window.localStorage.setItem("darkMode", "true");
+      } else {
+        rootElement.classList.remove("dark");
+        window.localStorage.setItem("darkMode", "false");
+      }
     }
   }, [isDarkMode]);
 
   const handleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
+    setIsDarkMode(!isDarkMode as any);
     setIsOpen(!isOpen);
   };
 
@@ -41,14 +47,14 @@ export const Header = () => {
     <header className="overflow-x-hidden overflow-y-hidden sticky top-0">
       <section className="dark:bg-gray-800 bg-[#ffffff] shadow md:shadow sm:flex sm:justify-between sm:px-4 sm:py-3 sm:items-center">
         <div className="flex h-18 items-center justify-between px-4 py-3 sm:p-0">
-          <div>
+          <div className="w-20 h-20">
             <Image
               priority
-              src={isDarkMode ? "/logo-light.svg" : "/logo-dark.svg"}
+              src={isDarkMode ? "/keys_logo_dark.svg" : "/keys_logo_light.svg"}
               width={80}
               height={80}
               alt="Keys Animation Logo"
-              className="cursor-pointer"
+              className="cursor-pointer w-20"
               onClick={() => router.push("/")}
             />
           </div>
