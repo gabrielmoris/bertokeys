@@ -12,7 +12,7 @@ const options = [
     { option: "Resto de España (220€)", valueOfOption: 220 },
   ],
   [
-    { option: "Si (150€)", valueOfOption: 100 },
+    { option: "Si (100€)", valueOfOption: 100 },
     { option: "No", valueOfOption: 0 },
   ],
   [
@@ -69,7 +69,7 @@ export const Presupuesto = () => {
   const [stage, setStage] = useState<number>(0);
   const [selectedValue, setSelectedValue] = useState(stage < 10 ? options[stage][0] : options[0][0]);
   const [budget, setBudget] = useState(0);
-  const [userSelections, setUserSelections] = useState([]);
+  const [userSelections, setUserSelections] = useState<any>([]);
 
   const handleDropdownChange = (value: any) => {
     setSelectedValue(value);
@@ -77,14 +77,16 @@ export const Presupuesto = () => {
 
   const handleBtnClick = () => {
     if (stage < 10) setBudget(budget + selectedValue.valueOfOption);
-    setUserSelections(...userSelections, selectedValue);
+    const selection = { title: titles[stage], ...selectedValue };
+    setUserSelections([...userSelections, selection]);
+    setSelectedValue(stage < 9 ? options[stage + 1][0] : options[0][0]);
     setStage(stage + 1);
   };
 
   return (
     <section className=" w-full xl:w-[70%] xl:px-10 px-8 border-2 pb-10 rounded flex flex-col items-center justify-center my-5" id="presupuesto">
       <p className="font-zendots text-xl  md:text-2xl font-bold text-center m-10">Presupuesto</p>
-      {stage < 10 && <Dropdown key={stage} options={options[stage]} onChange={handleDropdownChange} title={titles[stage]} />}
+      {stage < 9 && <Dropdown key={stage} options={options[stage]} onChange={handleDropdownChange} title={titles[stage]} />}
       <Button btnFunction={handleBtnClick} btnLabel={"label"} />
       <div className="w-full mt-10 flex justify-end">{budget}€</div>
     </section>
