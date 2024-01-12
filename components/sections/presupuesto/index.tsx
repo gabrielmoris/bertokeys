@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
-import { Dropdown } from "../uiComponents/dropdown";
-import { Button } from "../uiComponents/button";
+import { JSXElementConstructor, PromiseLikeOfReactNode, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import { Dropdown } from "../../uiComponents/dropdown";
+import { Button } from "../../uiComponents/button";
+import { Factura } from "./factura";
 
 const options = [
   [
@@ -67,28 +68,47 @@ const titles = [
 
 export const Presupuesto = () => {
   const [stage, setStage] = useState<number>(0);
-  const [selectedValue, setSelectedValue] = useState(stage < 10 ? options[stage][0] : options[0][0]);
+  const [selectedValue, setSelectedValue] = useState<{ option: string; valueOfOption: number; title: string }>({
+    title: titles[0],
+    ...options[0][0],
+  });
   const [budget, setBudget] = useState(0);
   const [userSelections, setUserSelections] = useState<any>([]);
 
   const handleDropdownChange = (value: any) => {
-    setSelectedValue(value);
+    const selection = { title: titles[stage], ...value };
+    setSelectedValue(selection);
   };
 
+  useEffect(() => {
+    if (stage > 0 && stage < 11) {
+      setUserSelections([...userSelections, selectedValue]);
+      if (stage < 10) {
+        const selection = { title: titles[stage], ...options[stage][0] };
+        setSelectedValue(stage < 10 ? selection : { option: "", valueOfOption: 0, title: "" });
+      }
+    }
+    if (stage === 10) console.log(userSelections);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stage]);
+
   const handleBtnClick = () => {
-    if (stage < 10) setBudget(budget + selectedValue.valueOfOption);
-    const selection = { title: titles[stage], ...selectedValue };
-    setUserSelections([...userSelections, selection]);
-    setSelectedValue(stage < 9 ? options[stage + 1][0] : options[0][0]);
+    console.log(userSelections);
+    if (stage < 10) setBudget(budget + selectedValue!.valueOfOption);
     setStage(stage + 1);
   };
 
   return (
-    <section className=" w-full xl:w-[70%] xl:px-10 px-8 border-2 pb-10 rounded flex flex-col items-center justify-center my-5" id="presupuesto">
-      <p className="font-zendots text-xl  md:text-2xl font-bold text-center m-10">Presupuesto</p>
-      {stage < 9 && <Dropdown key={stage} options={options[stage]} onChange={handleDropdownChange} title={titles[stage]} />}
-      <Button btnFunction={handleBtnClick} btnLabel={"label"} />
+    <section
+      className="w-full xl:w-[70%] xl:px-10 px-8 border-2 border-gray-800 dark:border-white pb-10 rounded flex flex-col items-center justify-center my-5"
+      id="presupuesto"
+    >
+      <p className="font-zendots text-xl md:text-2xl font-bold text-center m-10">Presupuesto</p>
+      {stage < 10 ? <Dropdown key={stage} options={options[stage]} onChange={handleDropdownChange} title={titles[stage]} /> : <Factura />}
       <div className="w-full mt-10 flex justify-end">{budget}€</div>
+      <div className="mt-10 flex w-full justify-end">
+        <Button btnFunction={handleBtnClick} btnLabel={stage < 10 ? "label" : "Enviar"} />
+      </div>
     </section>
   );
 };

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
-import { Loading } from "../uiComponents/loading";
+import { Loading } from "../../uiComponents/loading";
 
 const YOUTUBE_PLAYLIST_ITEMS_API = "https://www.googleapis.com/youtube/v3/playlistItems";
 
