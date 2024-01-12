@@ -44,7 +44,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="overflow-x-hidden overflow-y-hidden sticky top-0">
+    <header className="overflow-x-hidden overflow-y-hidden sticky top-0 z-50">
       <section className="dark:bg-gray-800 bg-[#ffffff] shadow md:shadow sm:flex sm:justify-between sm:px-4 sm:py-3 sm:items-center">
         <div className="flex h-18 items-center justify-between px-4 py-3 sm:p-0">
           <div className="w-20 h-20">

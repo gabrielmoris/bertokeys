@@ -104,8 +104,15 @@ export const Presupuesto = () => {
       id="presupuesto"
     >
       <p className="font-zendots text-xl md:text-2xl font-bold text-center m-10">Presupuesto</p>
-      {stage < 10 ? <Dropdown key={stage} options={options[stage]} onChange={handleDropdownChange} title={titles[stage]} /> : <Factura />}
-      <div className="w-full mt-10 flex justify-end">{budget}€</div>
+      {stage < 10 ? (
+        <Dropdown key={stage} options={options[stage]} onChange={handleDropdownChange} title={titles[stage]} />
+      ) : (
+        <Factura userSelections={userSelections} />
+      )}
+      <p className="w-full mt-2 flex justify-end">
+        <span className="font-bold text-md px-2">Total:</span>
+        {budget}€
+      </p>
       <div className="mt-10 flex w-full justify-end">
         <Button btnFunction={handleBtnClick} btnLabel={stage < 10 ? "label" : "Enviar"} />
       </div>
