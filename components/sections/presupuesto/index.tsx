@@ -1,5 +1,5 @@
 "use client";
-import { JSXElementConstructor, PromiseLikeOfReactNode, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Dropdown } from "../../uiComponents/dropdown";
 import { Button } from "../../uiComponents/button";
 import { Factura } from "./factura";
@@ -93,7 +93,6 @@ export const Presupuesto = () => {
   }, [stage]);
 
   const handleBtnClick = () => {
-    console.log(userSelections);
     if (stage < 10) setBudget(budget + selectedValue!.valueOfOption);
     setStage(stage + 1);
   };
