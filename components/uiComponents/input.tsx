@@ -21,7 +21,7 @@ export const Input: React.FC<InputProps> = ({ label, name, type, onChange, ...re
         />
         <label
           htmlFor={name}
-          className="absolute top-2 peer-invalid:px-2 font-bold z-10 origin-[0] -translate-y-4 peer-invalid:scale-75 transform rounded-xl peer-invalidtext-sm duration-300 peer-placeholder-shown:font-light peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:font-bold peer-focus:bg-[rgb(217,221,247)] dark:peer-focus:bg-[#0d1025]  peer-focus:text-gray-800 dark:peer-focus:text-white"
+          className="absolute top-2 peer-invalid:px-2 font-bold z-10 origin-[0] -translate-y-4 peer-invalid:scale-75 transform rounded-xl peer-invalidtext-sm duration-300 peer-placeholder-shown:font-light peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:font-bold peer-focus:bg-[rgb(247,248,253)] dark:peer-focus:bg-[#0d1025]  peer-focus:text-gray-800 dark:peer-focus:text-white"
         >
           {label}
         </label>
@@ -57,7 +57,7 @@ export const Input: React.FC<InputProps> = ({ label, name, type, onChange, ...re
             id={name}
             type={type}
             autoComplete="on"
-            className={`peer h-16 pr-5 block w-full invalid:border rounded-lg peer-placeholder-shown:border border-gray-500 bg-transparent opacity-60 pb-2.5 pt-4 text-sm focus:border-gray-800 focus:outline-none `}
+            className={`h-14 mt-3 pr-5 block w-full invalid:border rounded-lg peer-placeholder-shown:border border-gray-500 bg-transparent opacity-60 pb-2.5 pt-4 text-sm focus:border-gray-800 focus:outline-none `}
             placeholder=" "
             onChange={onChange}
             {...rest}
@@ -67,7 +67,7 @@ export const Input: React.FC<InputProps> = ({ label, name, type, onChange, ...re
             id={`${name}-time`}
             type="time"
             autoComplete="on"
-            className={`peer h-15 block pr-5 w-full invalid:border rounded-lg peer-placeholder-shown:border border-gray-500 bg-transparent opacity-60 pb-2.5 pt-4 text-sm focus:border-gray-800 focus:outline-none `}
+            className={`h-14 mt-3 block pr-5 w-full invalid:border rounded-lg peer-placeholder-shown:border border-gray-500 bg-transparent opacity-60 pb-2.5 pt-4 text-sm focus:border-gray-800 focus:outline-none `}
             placeholder=" "
             onChange={onChange} // Handle time change
             {...rest}
@@ -75,7 +75,7 @@ export const Input: React.FC<InputProps> = ({ label, name, type, onChange, ...re
         </div>
         <label
           htmlFor={name}
-          className="absolute top-2 peer-invalid:px-2 font-bold z-10 origin-[0] -translate-y-4 peer-invalid:scale-75 transform rounded-xl peer-invalidtext-sm duration-300 peer-placeholder-shown:font-light peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:font-bold peer-focus:bg-[rgb(217,221,247)] dark:peer-focus:bg-[#0d1025]  peer-focus:text-gray-800 dark:peer-focus:text-white"
+          className="absolute top-2 font-bold z-10 origin-[0] -translate-y-4 transform rounded-xl duration-300 dark:peer1-focus:bg-[#0d1025] dark:peer1-focus:text-white"
         >
           {label}
         </label>
@@ -97,7 +97,7 @@ export const Input: React.FC<InputProps> = ({ label, name, type, onChange, ...re
       />
       <label
         htmlFor={name}
-        className="absolute top-2 peer-invalid:px-2 font-bold z-10 origin-[0] -translate-y-4 peer-invalid:scale-75 transform rounded-xl peer-invalidtext-sm duration-300 peer-placeholder-shown:font-light peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:font-bold peer-focus:bg-[rgb(217,221,247)] dark:peer-focus:bg-[#0d1025]  peer-focus:text-gray-800 dark:peer-focus:text-white"
+        className="absolute top-2 peer-invalid:px-2 font-bold z-10 origin-[0] -translate-y-4 peer-invalid:scale-75 transform rounded-xl peer-invalidtext-sm duration-300 peer-placeholder-shown:font-light peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:font-bold peer-focus:bg-[rgb(247,248,253)] dark:peer-focus:bg-[#0d1025]  peer-focus:text-gray-800 dark:peer-focus:text-white"
       >
         {label}
       </label>
