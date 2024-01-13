@@ -106,12 +106,9 @@ export const Presupuesto = () => {
       {stage < 10 ? (
         <Dropdown key={stage} options={options[stage]} onChange={handleDropdownChange} title={titles[stage]} />
       ) : (
-        <Factura userSelections={userSelections} />
+        <Factura userSelections={userSelections} budget={budget} />
       )}
-      <p className="w-full mt-2 flex justify-end">
-        <span className="font-bold text-md px-2">Total:</span>
-        {budget}€
-      </p>
+
       <div className="mt-10 flex w-full justify-end">
         <Button btnFunction={handleBtnClick} btnLabel={stage < 10 ? "label" : "Enviar"} />
       </div>
