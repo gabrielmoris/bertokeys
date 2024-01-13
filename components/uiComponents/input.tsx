@@ -6,14 +6,6 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTe
   imageSrc?: string;
 }
 
-function checkInputValue(input: { value: string; classList: { add: (arg0: string) => void; remove: (arg0: string) => void } }) {
-  if (input.value.trim() !== "") {
-    input.classList.add("border-green-500");
-  } else {
-    input.classList.remove("border-green-500");
-  }
-}
-
 export const Input: React.FC<InputProps> = ({ label, name, type, onChange, ...rest }) => {
   if (type === "textarea") {
     return (
@@ -65,7 +57,7 @@ export const Input: React.FC<InputProps> = ({ label, name, type, onChange, ...re
             id={name}
             type={type}
             autoComplete="on"
-            className={`peer pr-5 block w-full invalid:border rounded-lg peer-placeholder-shown:border border-gray-500 bg-transparent opacity-60 pb-2.5 pt-4 text-sm focus:border-gray-800 focus:outline-none `}
+            className={`peer h-16 pr-5 block w-full invalid:border rounded-lg peer-placeholder-shown:border border-gray-500 bg-transparent opacity-60 pb-2.5 pt-4 text-sm focus:border-gray-800 focus:outline-none `}
             placeholder=" "
             onChange={onChange}
             {...rest}
@@ -75,7 +67,7 @@ export const Input: React.FC<InputProps> = ({ label, name, type, onChange, ...re
             id={`${name}-time`}
             type="time"
             autoComplete="on"
-            className={`peer block pr-5 w-full invalid:border rounded-lg peer-placeholder-shown:border border-gray-500 bg-transparent opacity-60 pb-2.5 pt-4 text-sm focus:border-gray-800 focus:outline-none `}
+            className={`peer h-15 block pr-5 w-full invalid:border rounded-lg peer-placeholder-shown:border border-gray-500 bg-transparent opacity-60 pb-2.5 pt-4 text-sm focus:border-gray-800 focus:outline-none `}
             placeholder=" "
             onChange={onChange} // Handle time change
             {...rest}
@@ -98,7 +90,7 @@ export const Input: React.FC<InputProps> = ({ label, name, type, onChange, ...re
         id={name}
         type={type}
         autoComplete="on"
-        className="peer block w-full invalid:border rounded-lg peer-placeholder-shown:border border-gray-500 bg-transparent opacity-60 pb-2.5 pt-4 text-sm focus:border-gray-800 focus:outline-none"
+        className="peer block h-16 w-full invalid:border rounded-lg peer-placeholder-shown:border border-gray-500 bg-transparent opacity-60 my-5 py-5 text-sm focus:border-gray-800 focus:outline-none"
         placeholder=" "
         onChange={onChange}
         {...rest}

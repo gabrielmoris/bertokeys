@@ -9,7 +9,7 @@ const removePriceFromOption = (inputString: string) => {
   return result;
 };
 
-export const Factura = ({ userSelections, budget }: any) => {
+export const BudgetForm = ({ userSelections, budget }: any) => {
   const componentRef = useRef(null);
 
   const captureScreenshot = () => {
@@ -23,7 +23,7 @@ export const Factura = ({ userSelections, budget }: any) => {
 
           const downloadLink = document.createElement("a");
           downloadLink.href = dataUrl;
-          downloadLink.download = "factura.png";
+          downloadLink.download = "presupuesto.png";
 
           document.body.appendChild(downloadLink);
           downloadLink.click();
@@ -57,7 +57,7 @@ export const Factura = ({ userSelections, budget }: any) => {
           }}
         />
         <Input
-          label="Fecha de la celebración"
+          label="Fecha y hora de la celebración"
           type="date"
           name="fecha"
           onChange={(e) => {

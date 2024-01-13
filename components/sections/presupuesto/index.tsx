@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Dropdown } from "../../uiComponents/dropdown";
 import { Button } from "../../uiComponents/button";
-import { Factura } from "./factura";
+import { BudgetForm } from "./presupuesto";
 
 const options = [
   [
@@ -106,7 +106,7 @@ export const Presupuesto = () => {
       {stage < 10 ? (
         <Dropdown key={stage} options={options[stage]} onChange={handleDropdownChange} title={titles[stage]} />
       ) : (
-        <Factura userSelections={userSelections} budget={budget} />
+        <BudgetForm userSelections={userSelections} budget={budget} />
       )}
 
       <div className="mt-10 flex w-full justify-end">
