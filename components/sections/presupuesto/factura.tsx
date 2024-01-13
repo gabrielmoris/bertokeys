@@ -13,6 +13,9 @@ export const Factura = ({ userSelections }: any) => {
 
   const captureScreenshot = () => {
     if (componentRef.current) {
+      const rootElement = document.documentElement;
+      rootElement.classList.remove("dark");
+      window.localStorage.setItem("darkMode", "false");
       html2canvas(componentRef.current)
         .then((canvas) => {
           const dataUrl = canvas.toDataURL();
@@ -24,6 +27,8 @@ export const Factura = ({ userSelections }: any) => {
           document.body.appendChild(downloadLink);
           downloadLink.click();
           document.body.removeChild(downloadLink);
+          rootElement.classList.add("dark");
+          window.localStorage.setItem("darkMode", "true");
         })
         .catch((error) => {
           console.error("Error capturing screenshot:", error);
