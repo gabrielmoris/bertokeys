@@ -1,6 +1,5 @@
 import { Multimedia } from "@/components/sections/multimedia";
 import { Presupuesto } from "@/components/sections/presupuesto";
-import Image from "next/image";
 
 export default function Home() {
   return (

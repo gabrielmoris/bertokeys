@@ -88,7 +88,9 @@ export const Presupuesto = () => {
         setSelectedValue(stage < 10 ? selection : { option: "", valueOfOption: 0, title: "" });
       }
     }
-    if (stage === 10) console.log(userSelections);
+    if (stage === 11) {
+      console.log("send");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stage]);
 
@@ -102,16 +104,14 @@ export const Presupuesto = () => {
       className="w-full xl:w-[70%] xl:px-10 px-8 border-2 border-gray-800 dark:border-white pb-10 rounded flex flex-col items-center justify-center my-5"
       id="presupuesto"
     >
-      <p className="font-zendots text-xl md:text-2xl font-bold text-center m-10">Presupuesto</p>
+      {stage < 10 && <p className="font-zendots text-xl md:text-2xl font-bold text-center m-10">Calcula el presupuesto</p>}
       {stage < 10 ? (
         <Dropdown key={stage} options={options[stage]} onChange={handleDropdownChange} title={titles[stage]} />
       ) : (
         <BudgetForm userSelections={userSelections} budget={budget} />
       )}
 
-      <div className="mt-10 flex w-full justify-end">
-        <Button btnFunction={handleBtnClick} btnLabel={stage < 10 ? "label" : "Enviar"} />
-      </div>
+      <div className="mt-10 flex w-full justify-end">{stage < 10 && <Button btnFunction={handleBtnClick} btnLabel="Siguiente" />}</div>
     </section>
   );
 };
