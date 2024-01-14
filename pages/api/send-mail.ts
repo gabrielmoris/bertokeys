@@ -1,9 +1,19 @@
 import { Resend } from "resend";
 
 export default function handler(
-  req: any,
-  res: { status: (arg0: number) => { (): any; new (): any; json: { (arg0: { message: string }): void; new (): any } } }
+  req: { method: string; body: any },
+  res: {
+    setHeader: (arg0: string, arg1: string) => void;
+    status: (arg0: number) => { (): any; new (): any; json: { (arg0: { message: string }): void; new (): any } };
+  }
 ) {
+  if (req.method === "OPTIONS") {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.status(200);
+    return;
+  }
+
   if (req.method !== "POST") {
     res.status(405).json({ message: "Only POST requests allowed" });
     return;
