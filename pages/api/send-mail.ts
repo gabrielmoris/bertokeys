@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 
-export default function handler(
+export default async function handler(
   req: { method: string; body: any },
   res: {
     setHeader: (arg0: string, arg1: string) => void;
@@ -23,8 +23,8 @@ export default function handler(
   const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
 
   try {
-    if (dataUrl) {
-      const imageb64 = dataUrl.replace(/^data:(image\/(png|x-icon|svg\+xml|jpeg|gif));base64,/, "");
+    if (dataUrl.length) {
+      const imageb64 = await dataUrl.replace(/^data:(image\/(png|x-icon|svg\+xml|jpeg|gif));base64,/, "");
 
       let attachments = [
         {
@@ -35,7 +35,7 @@ export default function handler(
         },
       ];
 
-      resend.emails
+      await resend.emails
         .send({
           from: "onboarding@resend.dev",
           to: "gabrielcmoris@gmail.com",
