@@ -1,5 +1,5 @@
 import html2canvas from "html2canvas";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Input } from "../../uiComponents/input";
 import { Button } from "@/components/uiComponents/button";
@@ -12,67 +12,76 @@ const removePriceFromOption = (inputString: string) => {
 
 export const BudgetForm = ({ userSelections, budget }: any) => {
   const componentRef = useRef(null);
+  const [isDoingScreenshoot, setIsDoingScreenshoot] = useState<boolean>(false);
 
   const captureScreenshot = () => {
-    if (componentRef.current) {
-      const rootElement = document.documentElement;
-      const wasDark = window.localStorage.getItem("darkMode");
+    setIsDoingScreenshoot(true);
+    setTimeout(() => {
+      if (componentRef.current) {
+        const rootElement = document.documentElement;
+        const wasDark = window.localStorage.getItem("darkMode");
 
-      rootElement.classList.remove("dark");
-      window.localStorage.setItem("darkMode", "false");
-      html2canvas(componentRef.current)
-        .then((canvas) => {
-          const dataUrl = canvas.toDataURL();
+        rootElement.classList.remove("dark");
+        window.localStorage.setItem("darkMode", "false");
+        html2canvas(componentRef.current)
+          .then((canvas) => {
+            const dataUrl = canvas.toDataURL();
 
-          const downloadLink = document.createElement("a");
-          downloadLink.href = dataUrl;
-          downloadLink.download = "presupuesto.png";
+            const downloadLink = document.createElement("a");
+            downloadLink.href = dataUrl;
+            downloadLink.download = "presupuesto.png";
 
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
-          document.body.removeChild(downloadLink);
-          if (wasDark === "true") {
-            rootElement.classList.add("dark");
-            window.localStorage.setItem("darkMode", "true");
-          }
-        })
-        .catch((error) => {
-          console.error("Error capturing screenshot:", error);
-        });
-    }
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            if (wasDark === "true") {
+              rootElement.classList.add("dark");
+              window.localStorage.setItem("darkMode", "true");
+            }
+            setIsDoingScreenshoot(false);
+          })
+          .catch((error) => {
+            console.error("Error capturing screenshot:", error);
+          });
+      }
+    }, 0);
   };
 
   const sendBudget = () => {
-    if (componentRef.current) {
-      const rootElement = document.documentElement;
-      const wasDark = window.localStorage.getItem("darkMode");
+    setIsDoingScreenshoot(true);
+    setTimeout(() => {
+      if (componentRef.current) {
+        const rootElement = document.documentElement;
+        const wasDark = window.localStorage.getItem("darkMode");
 
-      rootElement.classList.remove("dark");
-      window.localStorage.setItem("darkMode", "false");
+        rootElement.classList.remove("dark");
+        window.localStorage.setItem("darkMode", "false");
 
-      html2canvas(componentRef.current)
-        .then((canvas) => {
-          const dataUrl = canvas.toDataURL();
+        html2canvas(componentRef.current)
+          .then((canvas) => {
+            const dataUrl = canvas.toDataURL();
 
-          if (wasDark === "true") {
-            rootElement.classList.add("dark");
-            window.localStorage.setItem("darkMode", "true");
-          }
+            if (wasDark === "true") {
+              rootElement.classList.add("dark");
+              window.localStorage.setItem("darkMode", "true");
+            }
 
-          fetch("/api/send-mail", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dataUrl),
+            fetch("/api/send-mail", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(dataUrl),
+            })
+              .then((res) => res.json())
+              .then((result) => console.log("RESULT:", result));
+            setIsDoingScreenshoot(false);
           })
-            .then((res) => res.json())
-            .then((result) => console.log("RESULT:", result));
-        })
-        .catch((error) => {
-          console.error("Error capturing screenshot:", error);
-        });
-    }
+          .catch((error) => {
+            console.error("Error capturing screenshot:", error);
+          });
+      }
+    });
   };
 
   return (
@@ -97,17 +106,31 @@ export const BudgetForm = ({ userSelections, budget }: any) => {
         );
       })}
 
-      <div onClick={captureScreenshot} className="items-center cursor-pointer inline-flex">
-        <Image priority src={"/download_icon.svg"} width={5} height={5} alt="Keys Animation Logo" className="cursor-pointer w-5 mr-1" />
-        <p className="text-xs">Descargar</p>
+      {!isDoingScreenshoot && (
+        <div onClick={captureScreenshot} className="items-center cursor-pointer inline-flex">
+          <Image priority src={"/download_icon.svg"} width={5} height={5} alt="Keys Animation Logo" className="cursor-pointer w-5 mr-1 dark:invert" />
+          <p className="text-xs">Descargar</p>
+        </div>
+      )}
+      <div className="mt-5">
+        <Input
+          label={
+            <p>
+              Acepto los <span className="hover:text-blue-500 cursor-pointer underline">Términos y Condiciones</span> y la {""}
+              <span className="hover:text-blue-500 cursor-pointer underline">Política de Protección de Datos</span>
+            </p>
+          }
+          onChange={(e) => console.log((e.target as HTMLInputElement).checked)}
+          type="checkbox"
+          name="terminos"
+        />
       </div>
+
       <p className="w-full mt-2 flex justify-end">
         <span className="font-bold text-md px-2">Total:</span>
         {budget}€
       </p>
-      <div className="mt-10 flex w-full justify-end">
-        <Button btnFunction={sendBudget} btnLabel="Enviar" />
-      </div>
+      <div className="mt-10 flex w-full justify-end">{!isDoingScreenshoot && <Button btnFunction={sendBudget} btnLabel="Enviar" />}</div>
     </div>
   );
 };

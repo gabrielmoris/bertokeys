@@ -1,7 +1,7 @@
 import React from "react";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
-  label: string;
+  label: string | JSX.Element;
   name: string;
   imageSrc?: string;
 }
@@ -41,13 +41,14 @@ export const Input: React.FC<InputProps> = ({ label, name, type, onChange, ...re
             {...rest}
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
           />
-          <label htmlFor={name} className="ml-2 text-sm  text-gray-800">
+          <label onClick={(e) => e.preventDefault()} htmlFor={name} className="ml-2 text-sm  text-gray-800 dark:text-white">
             {label}
           </label>
         </div>
       </div>
     );
   }
+
   if (type === "date") {
     return (
       <div className="relative mb-5 w-full">

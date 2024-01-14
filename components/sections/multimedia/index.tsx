@@ -14,7 +14,7 @@ export const Multimedia = () => {
 
   useEffect(() => {
     setIsSmallScreen(window.innerWidth <= 768);
-    fetch(`${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&playlistId=PL_1PtPZ6qufySoZIHCMxMDQDZ68ZAVvTU&maxResults=4&key=${key}`)
+    fetch(`${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&playlistId=PLQ1eHTJUzMQTpZXSnuDDoyzCLUsonaBJM&maxResults=4&key=${key}`)
       .then((res) => {
         return res.json();
       })
