@@ -1,12 +1,14 @@
 import { Multimedia } from "@/components/sections/multimedia";
 import { Presupuesto } from "@/components/sections/presupuesto";
+import Reviews from "@/components/sections/reviews";
 
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-start p-5 md:p-24" style={{ minHeight: "calc(100vh - 6.5rem)" }}>
       {/* <p className="font-zendots text-xl  md:text-2xl font-bold text-center m-10">Keys Animation</p> */}
-      {/* <Multimedia /> */}
+      <Multimedia />
       <Presupuesto />
+      <Reviews />
     </main>
   );
 }
