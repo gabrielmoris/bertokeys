@@ -101,7 +101,7 @@ export const Presupuesto = () => {
 
   return (
     <section
-      className="w-full xl:w-[70%] xl:px-10 px-8 border-2 border-gray-800 dark:border-white pb-10 rounded flex flex-col items-center justify-center my-5"
+      className="w-full xl:w-[80%] xl:px-10 px-8 border-2 border-gray-800 dark:border-white pb-10 rounded flex flex-col items-center justify-center my-5"
       id="presupuesto"
     >
       {stage < 10 && <p className="font-zendots text-xl md:text-2xl font-bold text-center m-10">Calcula el presupuesto</p>}

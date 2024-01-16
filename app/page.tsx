@@ -1,5 +1,6 @@
 import { Multimedia } from "@/components/sections/multimedia";
 import { Presupuesto } from "@/components/sections/presupuesto";
+import Reviews from "@/components/sections/reviews";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       {/* <p className="font-zendots text-xl  md:text-2xl font-bold text-center m-10">Keys Animation</p> */}
       <Multimedia />
       <Presupuesto />
+      <Reviews />
     </main>
   );
 }

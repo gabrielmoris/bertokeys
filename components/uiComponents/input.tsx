@@ -70,7 +70,7 @@ export const Input: React.FC<InputProps> = ({ label, name, type, onChange, ...re
             autoComplete="on"
             className={`h-14 mt-3 block pr-5 w-full invalid:border rounded-lg peer-placeholder-shown:border border-gray-500 bg-transparent opacity-60 pb-2.5 pt-4 text-sm focus:border-gray-800 focus:outline-none `}
             placeholder=" "
-            onChange={onChange} // Handle time change
+            onChange={onChange}
             {...rest}
           />
         </div>

@@ -25,9 +25,9 @@ export const Multimedia = () => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center" id="multimedia">
+    <div className="w-full flex flex-col items-center justify-center  xl:w-[80%]" id="multimedia">
       <h1 className="font-zendots text-xl  md:text-2xl font-bold text-center m-10">Escucha mi trabajo</h1>
-      <div className="flex gap-5 flex-row flex-wrap justify-center items-center ">
+      <div className="flex gap-10 flex-row flex-wrap justify-center xl:justify-between items-stretch ">
         {youtubeListLatestVideos.map((video) => {
           const { id, snippet = {} }: any = video;
           const { resourceId }: any = snippet;
@@ -36,8 +36,8 @@ export const Multimedia = () => {
             <ReactPlayer
               className="rounded border-2 border-black dark:border-white"
               controls
-              width={!isSmallScreen ? "450px" : "300px"}
-              height={!isSmallScreen ? "300px" : "200px"}
+              width={!isSmallScreen ? "480px" : "350px"}
+              height={!isSmallScreen ? "400px" : "200px"}
               key={id}
               fallback={<Loading />}
               url={`https://www.youtube.com/watch?v=${resourceId.videoId}`}
